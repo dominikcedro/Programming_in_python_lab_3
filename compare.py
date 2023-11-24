@@ -8,7 +8,7 @@ parser.add_argument('--query', help='Pathe to the query text file')
 parser.add_argument('--target', help='Path to the target text file')
 parser.add_argument('-k', type=int, help='Length of k-shingles')
 parser.add_argument('--remove_punctuation', action='store_true', help='Remove punctuation from the text')
-args = parser.parse_args()
+args2 = parser.parse_args()
 
 with open(args.query, 'r') as query_file:
     query = query_file.read()
