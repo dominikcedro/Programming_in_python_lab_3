@@ -29,5 +29,9 @@ def test_shingles():
         assert False
     except ValueError:
         assert True
-
-test_shingles()
+    #check when elements of t are not strings
+    try:
+        shingles(['a', 'b', 1, 'd'], 2)
+        assert False
+    except TypeError:
+        assert True

@@ -2,13 +2,30 @@
 @author Dominik Cedro
 """
 
-from typing import List
+def shingles(t, k):
+    """    This function takes a list of strings and returns a set of k-shingles.
 
-def shingles(t: List[str], k: int) -> List[str]:
+    Args:
+        t: list of strings
+        k: integer
+
+    Returns:
+        shingles_set: set of k-shingles
+
+    Raises:
+        TypeError: if t is not a list
+        TypeError: if k is not an integer
+        ValueError: if k is greater than the length of t
+        ValueError: if k is less than 1
+
+    """
     if not isinstance(t, list):
         raise TypeError("t is not a list")
+    for i in t:
+        if not isinstance(i, str):
+            raise TypeError("elements of t are not strings")
     if not isinstance(k, int):
-        raise TypeError("k is not a str")
+        raise TypeError("k is not a integer")
     if t == []:
         return set()
     if k > len(t):
@@ -22,7 +39,4 @@ def shingles(t: List[str], k: int) -> List[str]:
         # add the shingle to the set
         shingles_set.add(shingle)
     return shingles_set
-
-
-
 
