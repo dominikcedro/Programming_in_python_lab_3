@@ -28,8 +28,19 @@ def get_input():
             break
     del text_list[0] # how to do it more elegant?
     return text_list
+def most_common_shingles(shingles_list, n):
+    """Find n most common shingles in the shingles_list.
+
+        Args:
+            shingles_list: list of shingles
+            n: number of most common shingles to find
+    """
+    shingles_counter = collections.Counter(shingles_list)
+    print(shingles_counter.most_common(n))
 
 k = parser()[1]
 shingles_list = get_input()
-print(shingles(shingles_list, k))
+shingles_list = shingles(shingles_list, k)
+n = parser()[0]
+most_common_shingles(shingles_list, n)
 
