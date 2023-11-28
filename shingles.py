@@ -42,8 +42,4 @@ def shingles(t, k):
         # add the shingle to the set
         shingles_multiset.update({shingle: 1})
     return shingles_multiset
-#
-testing_list = ['something', 'something', 'this', 'and', 'that']
-print(shingles(testing_list,1 ))
-print(type(shingles(testing_list, 1)))
 

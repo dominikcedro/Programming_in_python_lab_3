@@ -5,6 +5,15 @@ import sys
 
 
 def parser():
+    """Parse command line arguments.
+    Args:
+        None
+    Returns:
+        n: number of most common shingles to find, default 1
+        k: length of k-shingles, default 1
+    Raises:
+        ValueError: if n or k are not positive integers
+    """
 
     parser = argparse.ArgumentParser(description='Generate and print most common shingles')
     parser.add_argument('-n', type=int, required=True, default=1, help='Number of most common k-shingles')
@@ -16,7 +25,8 @@ def parser():
 
 def get_input():
     """Get input text from the command line until an empty line is entered.
-
+    Args:
+        None
     Returns:
          text_list: list of lines.
     """
@@ -42,15 +52,21 @@ def most_common(shingles_multiset, n):
     """
     print(f"The {n} most common shingles are:")
     for shingle, count in shingles_multiset.most_common(n):
-        print(f"{shingle}: {count} times")
+        print(f"{shingle} : {count} times")
 
 def shingle_execute():
+    """This function executes the shingle.py script to print results.
+
+    Returns:
+        None
+
+    """
     n, k = parser()
     list_of_shingles = get_input()
     result_shingles = shingles(list_of_shingles, k)
     most_common(result_shingles, n)
 
-if __name__ == "__main__":
+if __name__ == "__main__": # so it can be imported properly
     shingle_execute()
 
 
