@@ -1,6 +1,6 @@
 
 from shingle import shingles
-from shingle import most_common_shingles
+from shingle import most_common
 
 
 

@@ -1,15 +1,18 @@
 import argparse
 from shingles import shingles
-import collections
+from collections import Counter
+import sys
+
 
 def parser():
+
     parser = argparse.ArgumentParser(description='Generate and print most common shingles')
     parser.add_argument('-n', type=int, required=True, default=1, help='Number of most common k-shingles')
-    parser.add_argument('-k', type=int, required=True,default=1, help='Length of k-shingles')
+    parser.add_argument('-k', type=int, required=True, default=1, help='Length of k-shingles')
     args1 = parser.parse_args()
-    k = args1.k # delete later
-    n = args1.n
+    n, k = args1.n, args1.k
     return n, k
+
 
 def get_input():
     """Get input text from the command line until an empty line is entered.
@@ -20,27 +23,35 @@ def get_input():
     text_list = []
     while True:
         try:
-            line = input()
-            if line == '':
-                break
+            line = input().rstrip('\n')
             text_list.append(line)
-        except EOFError: #check if it works
+            if not line:
+                break
+        except EOFError:  # check if it works
             break
-    del text_list[0] # how to do it more elegant?
+    text_list = ' '.join(text_list).split()
     return text_list
-def most_common_shingles(shingles_list, n):
+
+
+def most_common(shingles_multiset, n):
     """Find n most common shingles in the shingles_list.
 
         Args:
             shingles_list: list of shingles
             n: number of most common shingles to find
     """
-    shingles_counter = collections.Counter(shingles_list)
-    print(shingles_counter.most_common(n))
+    print(f"The {n} most common shingles are:")
+    for shingle, count in shingles_multiset.most_common(n):
+        print(f"{shingle}: {count} times")
 
-k = parser()[1]
-shingles_list = get_input()
-shingles_list = shingles(shingles_list, k)
-n = parser()[0]
-most_common_shingles(shingles_list, n)
+def shingle_execute():
+    n, k = parser()
+    list_of_shingles = get_input()
+    result_shingles = shingles(list_of_shingles, k)
+    most_common(result_shingles, n)
+
+if __name__ == "__main__":
+    shingle_execute()
+
+
 

@@ -1,6 +1,6 @@
 from shingles import shingles
 
-def test_shingles():
+def test_shingles_typical():
     # check for normal input
     assert shingles(['a', 'b', 'c', 'd'], 2) == {'a b', 'b c', 'c d'}
     #check for empty string
