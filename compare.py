@@ -1,7 +1,8 @@
 import argparse
-from collections import Counter
 import string
 from shingles import shingles
+
+
 def parser_compare():
     """Parser for the compare.py script
     Args:
@@ -15,11 +16,12 @@ def parser_compare():
 
     """
     parser = argparse.ArgumentParser(description='Compare two text files with Jaccards similarity')
-    parser.add_argument('--query',required=True, help='Path to the query text file')
-    parser.add_argument('--target',required=True, help='Path to the target text file')
-    parser.add_argument('-k', type=int,required=True, help='Length of k-shingles')
+    parser.add_argument('--query', required=True, help='Path to the query text file')
+    parser.add_argument('--target', required=True, help='Path to the target text file')
+    parser.add_argument('-k', type=int, required=True, help='Length of k-shingles')
     parser.add_argument('--remove_punctuation', action='store_true', help='Remove punctuation from the text')
     return parser.parse_args()
+
 
 def open_files(args):
     """
@@ -32,13 +34,14 @@ def open_files(args):
         target -- target text file as a string
 
     """
-    #open query file
+    # open query file
     with open(args.query, 'r') as query_file:
         query = query_file.read()
     # open target
     with open(args.target, 'r') as target_file:
         target = target_file.read()
     return query, target
+
 
 def remove_punctuation(query, target, args):
     """Removed punctuation from the text
@@ -52,10 +55,11 @@ def remove_punctuation(query, target, args):
         query -- query text file as a string, with no punctuation
         target -- target text file as a string with no punctuation
     """
-    if args.remove_punctuation: # if somebody uses this remove punctuation option
+    if args.remove_punctuation:  # if somebody uses this remove punctuation option
         query = query.translate(str.maketrans('', '', string.punctuation))
         target = target.translate(str.maketrans('', '', string.punctuation))
     return query, target
+
 
 def turn_text_to_list(query, target):
     """Turns text into lists of words
@@ -71,6 +75,7 @@ def turn_text_to_list(query, target):
     target = target.split()
     return query, target
 
+
 def turn_to_shingles(query, target, args):
     """
 
@@ -84,8 +89,9 @@ def turn_to_shingles(query, target, args):
         target_shingles --  list of k-shingles from the target text file
     """
     query_shingles = shingles(query, args.k)
-    target_shingles =shingles(target, args.k)
+    target_shingles = shingles(target, args.k)
     return query_shingles, target_shingles
+
 
 def jaccard(query, target):
     """Calculates Jaccard similarity between two texts
@@ -120,6 +126,7 @@ def execute_compare():
     query, target = turn_to_shingles(query, target, args)
     similarity = abs(jaccard(query, target))
     print(f"Jaccard similarity is: {similarity}")
+
 
 if __name__ == "__main__":
     execute_compare()

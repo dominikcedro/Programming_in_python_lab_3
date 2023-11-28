@@ -34,7 +34,7 @@ def shingles(t, k):
         raise ValueError("k is greater than the length of t")
     if k < 1:
         raise ValueError("k is less than 1")
-    #create and empty set
+    # create and empty set
     shingles_multiset = Counter()
     # iterate ove list
     for i in range(len(t) - k + 1):
@@ -42,4 +42,3 @@ def shingles(t, k):
         # add the shingle to the set
         shingles_multiset.update({shingle: 1})
     return shingles_multiset
-
